@@ -21,10 +21,11 @@ async function bootstrap() {
 
   // Swagger configuration
   const config = new DocumentBuilder()
-    .setTitle('Blog ApI') // Add a title
-    .setDescription('The API description')// Add a description
+    .setTitle('Meridian API') // Add a title
+    .setDescription('Productivity-powered on-chain economy built on the Stellar blockchain.')// Add a description
     .setTermsOfService('http://localhost:3000/terms of service')
     .setVersion('1.0') // Set the API version
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

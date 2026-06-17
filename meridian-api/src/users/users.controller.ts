@@ -20,9 +20,7 @@ import { CreateUserDto } from 'src/DTO/create-user.dto';
 import { GetuserParamDto } from 'src/DTO/userparamdto';
 import { UserService } from './providers/user.services';
 import { EditUserDto } from 'src/DTO/patch-user.dto';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { ApiOperation } from '@nestjs/swagger';
-import { ApiQuery } from '@nestjs/swagger';
+import { ApiResponse, ApiTags, ApiOperation, ApiQuery, ApiBearerAuth } from '@nestjs/swagger';
 import { AccessTokenGuard } from 'src/auth/guard/access-token/access-token.guard';
 import { Auth } from 'src/auth/decorators/auth/auth.decorator';
 import { AuthType } from 'src/auth/enums/auth-type.enum';
@@ -65,6 +63,7 @@ export class UsersController {
     description: 'the page number of entries returned per query',
   })
   @Auth(AuthType.Bearer)
+  @ApiBearerAuth()
   public getUsers(
     @Param() getuserParamDto: GetuserParamDto,
     @Query('limit', new DefaultValuePipe(20), ParseIntPipe) limit: number,
@@ -76,6 +75,9 @@ export class UsersController {
   }
 
   @Post()
+  @ApiOperation({ summary: 'Create a new user' })
+  @ApiResponse({ status: 201, description: 'User created successfully' })
+  @ApiResponse({ status: 400, description: 'Bad request' })
   @UseInterceptors(ClassSerializerInterceptor)
   // @SetMetadata('authType, 'None')
   @Auth(AuthType.None)
@@ -85,34 +87,50 @@ export class UsersController {
   }
 
   @Post('/many-users')
+  @ApiOperation({ summary: 'Create multiple users' })
+  @ApiResponse({ status: 201, description: 'Users created successfully' })
+  @ApiResponse({ status: 400, description: 'Bad request' })
   public createMany (@Body() createManyUserDto: CreateManyUsersDto) {
     return this.userService.createMany(createManyUserDto)
 
   }
 
   @Delete()
+  @ApiOperation({ summary: 'Delete users' })
+  @ApiResponse({ status: 200, description: 'Users deleted successfully' })
   public deleteUsers() {
     return this.userService.deleteUser;
   }
 
   @Patch()
+  @ApiOperation({ summary: 'Update user details' })
+  @ApiResponse({ status: 200, description: 'User updated successfully' })
+  @ApiResponse({ status: 400, description: 'Bad request' })
   public editedPost(@Body() edituserDto: EditUserDto) {
     return this.userService.editUser(edituserDto);
   }
 
 
   @Post('/with-book')
+  @ApiOperation({ summary: 'Create user with a default book entry' })
+  @ApiResponse({ status: 201, description: 'User and book created successfully' })
+  @ApiResponse({ status: 400, description: 'Bad request' })
   public createUserWithBook(@Body() userDto:CreateUserDto) {
     return this.userService.createUserWithBook(userDto)
 
   }
 
   @Get('/with-book')
+  @ApiOperation({ summary: 'Fetch all users with their books' })
+  @ApiResponse({ status: 200, description: 'List of users with books retrieved successfully' })
   public getAllUsersWithBook() {
     return this.userService.getAllUserWithBook();
   }
 
   @Get('find/:id')
+  @ApiOperation({ summary: 'Fetch a single user by ID' })
+  @ApiResponse({ status: 200, description: 'User retrieved successfully' })
+  @ApiResponse({ status: 404, description: 'User not found' })
   public getUserbyId (@Param('id', ParseIntPipe) id:number) {
     return this.userService.findOneById(id)
 

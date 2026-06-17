@@ -16,28 +16,31 @@ import { Column } from "typeorm";
 
 
 
+import { ApiProperty } from "@nestjs/swagger";
+
 export class CreateUserDto {
 
     @Column()
     @IsString()
+    @ApiProperty({ description: 'First name of the user', example: 'John' })
     firstName: string;
 
     @Column()
     @IsString()
+    @ApiProperty({ description: 'Last name of the user', example: 'Doe' })
     lastName: string;
 
     @Column()
     @IsEmail()
     @IsNotEmpty()
     @IsString()
+    @ApiProperty({ description: 'Email address of the user', example: 'john.doe@example.com' })
     email: string;
 
     @Column()
     @IsString()
     @IsNotEmpty()
-    // @Matches(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,16}$/, {
-    //     message: 'Password must be 8-16 characters long, include at least one uppercase letter, one lowercase letter, one number, and one special character.'
-    // })
+    @ApiProperty({ description: 'Password of the user', example: 'Password123!' })
     password: string;
 
 

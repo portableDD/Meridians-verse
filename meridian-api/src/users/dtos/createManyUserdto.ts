@@ -7,11 +7,9 @@ export class CreateManyUsersDto{
 
 
     @ApiProperty({
-        type: 'array',
+        type: [CreateUserDto],
         required: true,
-        items: {
-            type: 'User',
-        },
+        description: 'Array of users to create'
     })
     @IsNotEmpty()
     @IsArray()

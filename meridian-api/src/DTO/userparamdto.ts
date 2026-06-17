@@ -10,7 +10,6 @@ export class GetuserParamDto {
         description:'Get user with a specific ID',
         example:1234,
     })
-    @ApiProperty()
     @IsOptional()
     @IsInt()
     @Type (() => Number )

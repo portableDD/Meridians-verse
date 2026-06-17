@@ -16,6 +16,10 @@ export class CreatePostDto {
     @IsNotEmpty()
     title:string;
 
+    @ApiProperty({
+        description: "ID of the author user",
+        example: 1
+    })
     @IsNotEmpty()
     @IsInt()
     authorId:number;
@@ -41,39 +45,36 @@ export class CreatePostDto {
     @IsOptional()
     content: string;
 
+    @ApiPropertyOptional({
+        description: "URL of the featured image for the post",
+        example: "https://example.com/image.png"
+    })
     @IsString()
     @IsOptional()
     imageUrl:string;
 
+    @ApiPropertyOptional({
+        description: "ISO8601 formatted publication date",
+        example: "2026-06-17T00:00:00.000Z"
+    })
     @IsDate()
     @IsISO8601()
     @IsOptional()
     publishedDate:Date;
 
     @ApiProperty({
-        description:"possible value are strings"
+        description:"Array of tag IDs associated with this post",
+        example: [1, 2]
     })
     @IsArray()
     @IsInt({each:true})
     @IsOptional()
     tags: number[];
 
-    // @ApiPropertyOptional({
-    //     type: 'object',
-    //     required: false,
-    //     items:{
-    //         type:'object',
-    //         properties:{
-    //             metaValue:{
-    //                 type:'json',
-    //                 description:'the meta value json string',
-    //                 example:'{sidebarEnabled: true}',
-    //             }
-    //         }
-    //     }
-    // })
-
-
+    @ApiPropertyOptional({
+        type: CreatePostMetaOptionsDto,
+        description: "Metadata options for the post"
+    })
     @IsOptional()
     @ValidateNested({each:true})
     @Type(() => CreatePostMetaOptionsDto)
