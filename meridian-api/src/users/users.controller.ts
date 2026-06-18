@@ -31,6 +31,9 @@ import { AccessTokenGuard } from 'src/auth/guard/access-token/access-token.guard
 import { Auth } from 'src/auth/decorators/auth/auth.decorator';
 import { AuthType } from 'src/auth/enums/auth-type.enum';
 import { CreateManyUsersDto } from './dtos/createManyUserdto';
+import { Roles } from 'src/auth/decorators/roles/roles.decorator';
+import { RolesGuard } from 'src/auth/guard/roles/roles.guard';
+import { UserRole } from './user.entity';
 
 @Controller('users')
 // line 14 is a method

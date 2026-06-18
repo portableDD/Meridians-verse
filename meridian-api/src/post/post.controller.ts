@@ -14,9 +14,13 @@ import {
 import { PostsService } from './provider/post.service';
 import { GetPostsParamDto } from 'src/DTO/postparamdto';
 import { CreatePostDto } from 'src/DTO/create-post.dto';
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { PatchPostDto } from 'src/DTO/patch-post.dto';
 import { GetPostsDto } from 'src/DTO/getPostdto';
+import { AccessTokenGuard } from 'src/auth/guard/access-token/access-token.guard';
+import { RolesGuard } from 'src/auth/guard/roles/roles.guard';
+import { Roles } from 'src/auth/decorators/roles/roles.decorator';
+import { UserRole } from 'src/users/user.entity';
 
 @ApiTags('Posts')
 @Controller('posts')
