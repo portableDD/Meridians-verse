@@ -15,11 +15,17 @@ import { ApiProperty } from '@nestjs/swagger';
 export class CreateUserDto {
   @Column()
   @IsString()
+  @IsNotEmpty()
+  @MinLength(2)
+  @MaxLength(50)
   @ApiProperty({ description: 'First name of the user', example: 'John' })
   firstName: string;
 
   @Column()
   @IsString()
+  @IsNotEmpty()
+  @MinLength(2)
+  @MaxLength(50)
   @ApiProperty({ description: 'Last name of the user', example: 'Doe' })
   lastName: string;
 
@@ -36,6 +42,11 @@ export class CreateUserDto {
   @Column()
   @IsString()
   @IsNotEmpty()
+  @MinLength(8)
+  @MaxLength(100)
+  @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/, {
+    message: 'Password must contain at least one uppercase letter, one lowercase letter, and one number',
+  })
   @ApiProperty({ description: 'Password of the user', example: 'Password123!' })
   password: string;
 }

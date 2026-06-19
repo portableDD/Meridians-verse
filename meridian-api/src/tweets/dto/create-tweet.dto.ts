@@ -4,6 +4,8 @@ import {
   IsNotEmpty,
   IsOptional,
   IsString,
+  MinLength,
+  MaxLength,
 } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
@@ -14,6 +16,8 @@ export class CreateTweetDto {
   })
   @IsNotEmpty()
   @IsString()
+  @MinLength(1)
+  @MaxLength(280)
   text: string;
 
   @ApiPropertyOptional({
@@ -38,5 +42,6 @@ export class CreateTweetDto {
   })
   @IsOptional()
   @IsArray()
+  @IsInt({ each: true })
   Hashtags?: number[];
 }

@@ -5,7 +5,6 @@ import {
   IsIn,
   IsInt,
   IsISO8601,
-  isNotEmpty,
   IsNotEmpty,
   IsNumber,
   IsOptional,
@@ -69,9 +68,9 @@ export class CreatePostDto {
     description: 'ISO8601 formatted publication date',
     example: '2026-06-17T00:00:00.000Z',
   })
-  @IsDate()
   @IsISO8601()
   @IsOptional()
+  @Type(() => Date)
   publishedDate: Date;
 
   @ApiProperty({
