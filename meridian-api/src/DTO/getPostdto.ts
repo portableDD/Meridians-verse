@@ -1,5 +1,6 @@
 import { IntersectionType, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsDate, IsOptional } from 'class-validator';
+import { IsISO8601, IsOptional } from 'class-validator';
+import { Type } from 'class-transformer';
 import { PaginationQueryDto } from 'src/commom/pagination/pagination-query.dto';
 
 class GetPostsBaseDto {
@@ -7,16 +8,18 @@ class GetPostsBaseDto {
     description: 'Filter posts created on or after this date',
     example: '2026-06-17T00:00:00.000Z',
   })
-  @IsDate()
+  @IsISO8601()
   @IsOptional()
+  @Type(() => Date)
   startDate?: Date;
 
   @ApiPropertyOptional({
     description: 'Filter posts created on or before this date',
     example: '2026-06-17T23:59:59.000Z',
   })
-  @IsDate()
+  @IsISO8601()
   @IsOptional()
+  @Type(() => Date)
   endDate?: Date;
 }
 
