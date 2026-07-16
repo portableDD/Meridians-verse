@@ -1,7 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, DollarSign, Sparkles, Users } from 'lucide-react';
+import { CardMetric, CardMetrics } from '@/components/ui/metric-card';
 
 export function Hero() {
   return (
@@ -65,20 +66,30 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-16 pt-12 border-t border-border"
+          className="mt-16 pt-12 border-t border-border"
         >
-          <div className="text-center">
-            <div className="text-2xl font-bold text-primary mb-2">10K+</div>
-            <div className="text-sm text-muted-foreground">Active Users</div>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold text-primary mb-2">$2.5M</div>
-            <div className="text-sm text-muted-foreground">Streamed Monthly</div>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold text-primary mb-2">$500K</div>
-            <div className="text-sm text-muted-foreground">Yield Distributed</div>
-          </div>
+          <CardMetrics>
+            <CardMetric
+              icon={<Users className="h-5 w-5" />}
+              label="Active Users"
+              value="10K+"
+              tooltip="Active users across MERIDIAN focus, stream, and pool experiences."
+            />
+            <CardMetric
+              icon={<DollarSign className="h-5 w-5" />}
+              label="Streamed Monthly"
+              value="$2.5M"
+              delta="+14% month-over-month"
+              deltaVariant="positive"
+              tooltip="Total value streamed through MERIDIAN payment channels this month."
+            />
+            <CardMetric
+              icon={<Sparkles className="h-5 w-5" />}
+              label="Yield Distributed"
+              value="$500K"
+              tooltip="Yield rewards distributed from no-loss pools and community supercharge streams."
+            />
+          </CardMetrics>
         </motion.div>
       </div>
     </section>
