@@ -13,7 +13,6 @@ export function Header() {
   const activeSection = useActiveSection();
 
   const isActive = (id: string) => activeSection === id;
-
   const baseNavClassName =
     'text-sm font-medium text-foreground hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50';
 
@@ -26,49 +25,20 @@ export function Header() {
             <div className="text-2xl font-bold text-primary">M</div>
             <span className="text-lg font-semibold text-foreground">MERIDIAN</span>
           </div>
-          <h1 className="sr-only">Meridian Focus</h1>
 
           {/* Navigation - Desktop */}
           <nav className="hidden md:flex items-center gap-8">
-            <Link
-              href="#focus"
-              aria-current={isActive('focus') ? 'page' : undefined}
-              className={baseNavClassName}
-            >
-              Focus
-            </Link>
-            <Link
-              href="#stream"
-              aria-current={isActive('stream') ? 'page' : undefined}
-              className={baseNavClassName}
-            >
-              Stream
-            </Link>
-            <Link
-              href="#pool"
-              aria-current={isActive('pool') ? 'page' : undefined}
-              className={baseNavClassName}
-            >
-              Pool
-            </Link>
-            <Link
-              href="#features"
-              aria-current={isActive('features') ? 'page' : undefined}
-              className={baseNavClassName}
-            >
-              Features
-            </Link>
+            <Link href="#focus" aria-current={isActive('focus') ? 'page' : undefined} className={baseNavClassName}>Focus</Link>
+            <Link href="#stream" aria-current={isActive('stream') ? 'page' : undefined} className={baseNavClassName}>Stream</Link>
+            <Link href="#pool" aria-current={isActive('pool') ? 'page' : undefined} className={baseNavClassName}>Pool</Link>
+            <Link href="#features" aria-current={isActive('features') ? 'page' : undefined} className={baseNavClassName}>Features</Link>
           </nav>
 
           {/* CTA - Desktop */}
           <div className="hidden md:flex items-center gap-3">
             <ThemeToggle />
-            <button className="px-6 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50">
-              Sign In
-            </button>
-            <button className="px-6 py-2 text-sm font-medium rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50">
-              Get Started
-            </button>
+            <button className="px-6 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50">Sign In</button>
+            <button className="px-6 py-2 text-sm font-medium rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50">Get Started</button>
           </div>
 
           {/* Mobile menu button */}
@@ -86,43 +56,15 @@ export function Header() {
         {/* Mobile Menu */}
         {isOpen && (
           <nav id={mobileMenuId} className="md:hidden pb-4 space-y-2">
-            <Link
-              href="#focus"
-              className="block px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              Focus
-            </Link>
-            <Link
-              href="#stream"
-              className="block px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              Stream
-            </Link>
-            <Link
-              href="#pool"
-              className="block px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              Pool
-            </Link>
-            <Link
-              href="#features"
-              className="block px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              Features
-            </Link>
+            <Link href="#focus" className="block px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors" onClick={() => setIsOpen(false)}>Focus</Link>
+            <Link href="#stream" className="block px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors" onClick={() => setIsOpen(false)}>Stream</Link>
+            <Link href="#pool" className="block px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors" onClick={() => setIsOpen(false)}>Pool</Link>
+            <Link href="#features" className="block px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors" onClick={() => setIsOpen(false)}>Features</Link>
             <div className="flex items-center justify-between gap-2 px-4 pt-2">
-              <span className="text-xs uppercase tracking-wide text-muted-foreground">
-                Theme
-              </span>
+              <span className="text-xs uppercase tracking-wide text-muted-foreground">Theme</span>
               <ThemeToggle />
             </div>
-            <button className="w-full px-4 py-2 text-sm font-medium rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors">
-              Get Started
-            </button>
+            <button className="w-full px-4 py-2 text-sm font-medium rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors">Get Started</button>
           </nav>
         )}
       </div>
