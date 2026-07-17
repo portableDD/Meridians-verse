@@ -28,6 +28,7 @@ import { UploadModule } from './upload/upload.module';
 import { HealthModule } from './health/health.module';
 import { PrometheusModule } from '@willsoto/nestjs-prometheus';
 import { AuditModule } from './audit/audit.module';
+import { EventsModule } from './events/events.module';
 
 @Module({
   imports: [
@@ -112,6 +113,7 @@ import { AuditModule } from './audit/audit.module';
     HealthModule,
     PrometheusModule.register(),
     AuditModule,
+    EventsModule,
   ],
 
   controllers: [AppController],
