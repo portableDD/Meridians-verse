@@ -32,6 +32,22 @@ export class AuditController {
     };
   }
 
+  @Get('verify')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Verify the audit hash chain for all contract events' })
+  @ApiResponse({ status: 200, description: 'Hash-chain verification result' })
+  async verifyChain() {
+    return this.eventsService.verifyHashChain();
+  }
+
+  @Get('leaderboard')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Build Merkle proofs for the latest leaderboard audit entries' })
+  @ApiResponse({ status: 200, description: 'Merkle proof bundle for public leaderboard verification' })
+  async leaderboardProofs(@Query('limit') limit?: number) {
+    return this.eventsService.getLeaderboardProofs(limit ?? 10);
+  }
+
   @Get(':txHash')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Get a single audit log entry by transaction hash' })
