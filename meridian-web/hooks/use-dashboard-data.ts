@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback, useRef } from 'react'
 import { DashboardData, pollDashboardData } from '@/lib/api/dashboard'
+import { mark, measure } from '@/lib/utils/performance'
 
 /**
  * Configuration for dashboard data sync
@@ -124,7 +125,35 @@ export function useDashboardData(options: UseDashboardDataOptions = {}) {
     try {
       setState(prev => ({ ...prev, isLoading: true, isError: false }))
 
+      // Performance tracking: mark fetch start
+      mark('dashboard-data-fetch-start')
+
       const freshData = await pollDashboardData()
+
+      // Performance tracking: mark fetch end and measure
+      mark('dashboard-data-fetch-end')
+      const fetchDuration = measure(
+        'dashboard-data-fetch',
+        'dashboard-data-fetch-start',
+        'dashboard-data-fetch-end'
+      )
+
+      // Log performance in development
+      if (process.env.NODE_ENV === 'development') {
+        console.log(`[Dashboard] Data fetch completed in ${fetchDuration.toFixed(2)}ms`)
+      }
+
+      // Report to analytics in production
+      if (process.env.NODE_ENV === 'production' && typeof window !== 'undefined') {
+        if ((window as any).gtag) {
+          (window as any).gtag('event', 'dashboard_data_fetch', {
+            value: Math.round(fetchDuration),
+            event_category: 'Dashboard Performance',
+            event_label: 'Data Fetch Duration',
+            non_interaction: true,
+          })
+        }
+      }
 
       setState(prev => ({
         ...prev,
