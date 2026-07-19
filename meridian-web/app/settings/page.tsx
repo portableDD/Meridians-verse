@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { ThemePanel } from './theme-panel'
 
 export const metadata: Metadata = {
   title: 'Settings | Meridians',
@@ -25,10 +26,7 @@ export default function SettingsPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            {/* Theme preview cards will go here */}
-            <div className="p-4 border rounded-md text-sm text-muted-foreground">
-              Theme selection placeholder
-            </div>
+            <ThemePanel />
           </CardContent>
         </Card>
       </div>
